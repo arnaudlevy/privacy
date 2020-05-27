@@ -1,12 +1,14 @@
 PATH
   remote: .
   specs:
-    privacy (0.1.0)
+    privacy (0.1.1)
+      thor (~> 0.20)
 
 GEM
   remote: https://rubygems.org/
   specs:
     rake (12.3.3)
+    thor (0.20.3)
 
 PLATFORMS
   ruby
