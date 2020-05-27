@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require "privacy"
+
+Privacy::CLI.start(ARGV)
