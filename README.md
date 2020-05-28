@@ -20,9 +20,9 @@ Or install it yourself as:
 
 ## Usage
 
-```
-privacy process ./file.xlsx
-```
+Process all excel files in current directory `privacy process`.
+
+Process a specific file in current directory `privacy process /file.xlsx`.
 
 ## Development
 
