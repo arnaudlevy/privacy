@@ -1,6 +1,6 @@
 require 'creek'
 require 'write_xlsx'
-require 'person'
+require 'privacy/person'
 
 class Privacy::Processor
   attr_reader :file
@@ -32,44 +32,21 @@ class Privacy::Processor
   end
 
   def filter_data
-    @ppmec = Person.new 'ppmec'
+    @ppmec = Privacy::Person.new 'ppmec'
     @ppmec.identify_columns sheet.rows.first
-    @ppvic = Person.new 'ppvic'
+    @ppvic = Privacy::Person.new 'ppvic'
     @ppvic.identify_columns sheet.rows.first
-
     sheet.rows.first.each do |key, value|
       worksheet.write key, value
     end
     sheet.rows.each_with_index do |row, index|
       next if index.zero?
-      identify_private_values row, index
+      @ppmec.anonymize row, index
+      @ppvic.anonymize row, index
       row.each do |key, value|
-        worksheet.write key, filter_value(key, value)
+        worksheet.write key, value
       end
     end
-  end
-
-  def identify_private_values(row, index)
-    # TODO find all private data in the row, so we can generate custom filter values
-    # first_name = 'Anne'
-    # last_name = 'Dupont'
-    # replacements = {
-    #   'Anne Dupont' => '[Prénom] [Nom]',
-    #   'Dupont Anne' => '[Nom] [Prénom]',
-    #   'A. D.' => [Initiales],
-    #   'A.D.' => [Initiales],
-    #   'A. D' => [Initiales]
-    #   'A.D' => [Initiales]
-    #   'A D.' => [Initiales]
-    #   'AD.' => [Initiales]
-    #   'AD' => [Initiales]
-    # }
-  end
-
-  def filter_value(key, value)
-    # TODO replace specific keys
-    # TODO replace some
-    value
   end
 
   def write_file
