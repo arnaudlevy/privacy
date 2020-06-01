@@ -6,12 +6,6 @@ class Privacy::Processor
   attr_reader :file
 
   DIRECTORY = 'processed'
-  PRIVATE_DATA = {
-    'Nom ppmec': '[Nom]',
-    'Prénom ppmec': '[Prénom]',
-    'Nom ppvic': '[Nom]',
-    'Prénom ppvic': '[Prénom]'
-  }
 
   def initialize(file)
     @file = file

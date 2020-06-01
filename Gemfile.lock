@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    privacy (0.1.3)
+    privacy (0.1.4)
       creek
       thor
       write_xlsx
